@@ -6,7 +6,7 @@ example showing the use of adafruit_progressbar
 """
 import time
 import displayio
-from adafruit_progressbar.adafruit_progressbar import ProgressBar
+from adafruit_progressbar.horizontalprogressbar import HorizontalProgressBar, HorizontalFillDirection
 from blinka_displayio_pygamedisplay import PyGameDisplay
 
 # Make the display context
@@ -24,14 +24,27 @@ splash.append(bg_sprite)
 display.show(splash)
 
 # set progress bar width and height relative to board's display
-width = display.width - 40
+width_offset = 0
+width = 200 #display.width - 140
 height = 30
 
-x = display.width // 2 - width // 2
+x = 0# width_offset // 2 # display.width // 2 - width // 2
 y = display.height // 3
 
 # Create a new progress_bar object at (x, y)
-progress_bar = ProgressBar(x, y, width, height, 1.0)
+position = (x, y)
+size = (width, height)
+min_value = 0.0
+max_value = 100.0
+value = 100.0
+bar_color = 0xFFFF00
+outline_color = 0x000000
+fill_color = None# 0x00ff00
+border_thickness = 2
+margin_size = 1
+direction = HorizontalFillDirection.LEFT_TO_RIGHT
+
+progress_bar = HorizontalProgressBar(position, size, min_value, max_value, value, bar_color, outline_color, fill_color, border_thickness, margin_size, direction)
 
 # Append progress_bar to the splash group
 splash.append(progress_bar)
